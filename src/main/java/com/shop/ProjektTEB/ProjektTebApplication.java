@@ -17,7 +17,7 @@ public class ProjektTebApplication {
 		- postęp prac,
 		- opis napotkanych problemów,
 		- wnioski
-		
+
 	Pierwsze sprawozdanie:
 		- dobrać się w pary/trójki,
 		- wybrać temat,
