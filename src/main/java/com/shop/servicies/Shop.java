@@ -1,31 +1,15 @@
-package com.shop.repositories;
+package com.shop.servicies;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+public class Shop {
 
-@Entity
-public class ShopEntity {
-    //Informacje na temat sprzedawanych produktów.
-    @Id
-    @GeneratedValue
-    private long id;
-    public String productName; //nazwa produktu
-    public String companyName; //nazwa firmy produkującej produkt
+    public String productName;
+    public String companyName;
     public Double price;
 
-    public ShopEntity(String productName, String companyName, Double price) {
+    public Shop(String productName, String companyName, Double price) {
         this.productName = productName;
         this.companyName = companyName;
         this.price = price;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getProductName() {
@@ -54,8 +38,7 @@ public class ShopEntity {
 
     @Override
     public String toString() {
-        return "ShopEntity{" +
-                "id=" + id +
+        return "Shop{" +
                 ", productName='" + productName + '\'' +
                 ", companyName='" + companyName + '\'' +
                 ", price=" + price +
