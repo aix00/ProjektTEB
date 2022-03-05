@@ -57,7 +57,8 @@ public class ShopEntity {
     public String toString() {
         return "ShopEntity{" +
                 "id=" + id +
-                ", name='" + productName + '\'' +
+                ", productName='" + productName + '\'' +
+                ", companyName='" + companyName + '\'' +
                 ", price=" + price +
                 '}';
     }
