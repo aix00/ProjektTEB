@@ -26,7 +26,7 @@ public class ShopRepository {
         return shopDatabaseRepository.findAll();
     }
     //Getting a specific product from ShopEntity based on its ID. If it doesn't exist it throws an exception
-    public ShopEntity getShopSpecifiedProduct(Integer id) throws NotFoundException {
+    public ShopEntity getSpecifiedShopProduct(Integer id) throws NotFoundException {
         return shopDatabaseRepository.findById(id).orElseThrow(NotFoundException::new);
     }
     //Updating specific product information

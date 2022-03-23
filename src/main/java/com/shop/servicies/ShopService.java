@@ -20,7 +20,7 @@ public class ShopService {
         return shopRepository.getShopProduct();
     }
     public ShopEntity getSpecifiedShopProduct(Integer id) throws NotFoundException {
-        return shopRepository.getShopSpecifiedProduct(id);
+        return shopRepository.getSpecifiedShopProduct(id);
     }
     public void updateProduct(Integer id, HttpShop httpShop) throws NotFoundException{
         Shop shop = new Shop(httpShop.getProductName(),httpShop.getCompanyName(),httpShop.getPrice());
