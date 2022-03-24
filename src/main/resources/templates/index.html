@@ -1,86 +1,72 @@
 <!DOCTYPE html>
 <html lang="pl-PL">
 <head>
+    <!-- Basic -->
     <meta charset="UTF-8">
-    <title>Shop Name</title>
-    <meta name="description" content="Shop Page for TEB Project">
-    <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" type="text/css" href="/style.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Site Metas -->
+    <link rel="icon" href="https://edu.wroc.pl/wp-content/uploads/2021/04/teb_edukacja_logo-s.jpg"/>
+    <meta name="description" content="Projekt strony internetowej TEB">
+    <meta name="author" content="Krystian Raczyński & Tymoteusz Jeske-Stock">
+
+    <title>Website Project Teb</title>
+
+    <!-- boostrap ccs -->
+    <link rel="stylesheet" type="text/css" href="css/boostrap.css" />
+
+    <!-- fonts style -->
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+
+    <!-- custom styles -->
+    <link href="css/style.css" rel="stylesheet" />
+
+    <!-- rensponsive style -->
+    <link href="css/responsive.css" rel="stylesheet" />
+
 </head>
-<body id="home_index" data-page="index" data-language="pl" data-currency="zł">
-<div class="top-sticky-bar-container">
-    <header class="header-fixed-container" id="header">
-        <div class="header-fixed">
+<body>
+
+<div class="hero_area">
+    <!-- header section -->
+    <header class="header_section">
+        <div class="header_top">
             <div class="container-fluid">
-                <div class="row align-items-center">
-                    <div class="col h-logo">
-                        <a href="/">
-                            <h1>
-                                <!--TODO Add logo for shopProject next line-->
-                                <img height="40" src="" alt="shopName" />
-                            </h1>
+                <div class="top_nav_container">
+                    <div class="contact_nav">
+                        <a href="">
+                            <i class="fa fa-phone" aria-hidden="true"></i>
+                            <span>
+                  Telefon : +48 123 456 789
+                </span>
+                        </a>
+                        <a href="">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                            <span>
+                  Email : projektTeb@gmail.com
+                </span>
                         </a>
                     </div>
-                    <div class="col h-content">
-                        <div class="h-row">
-                            <div class="h-quick-search">
-                                <!--TODO Add search function next line (no idea how to so far)-->
-                                <form action="" method="POST" name="quick_search" class="h-quick-search-box">
-                                    <input type="text" name="search" class="form-control quick-search" value=""/>
-                                    <input type="hidden" name="search_type" value="index"/>
-                                    <div class="h-quick-search-dropdown">
-                                        <div class="quick-search-dropdown">
-                                            <div class="md-top">
-                                                <select class="dropdown-select" name="elem_id">
-                                                    <option value="0" selected="selected">Wszystkie działy</option>
-                                                    <option value="1">Komputery</option>
-                                                    <option value="2">Telewizory i audio</option>
-                                                    <option value="3">Foto i kamery</option>
-                                                    <option value="4">AGD</option>
-                                                    <option value="5">Smartfony i smartwatche</option>
-                                                    <option value="6">Laptopy</option>
-                                                    <option value="7">Podzespoły komputerowe</option>
-                                                </select>
-                                                <button type="button" class="md-button" role="button">
-                                                    Wszystkie działy
-                                                </button>
-                                            </div>
-                                            <div class="md-list">
-                                                <ul class="md-list-collection">
-                                                    <li class="md-list-item selected " data-dropdown-value="0" data-dropdown-label="Wszystkie działy">
-                                                        Wszystkie działy
-                                                    </li>
-                                                    <li class="md-list-item  " data-dropdown-value="1" data-dropdown-label="Komputery">
-                                                        Komputery
-                                                    </li>
-                                                    <li class="md-list-item  " data-dropdown-value="2" data-dropdown-label="Telewizory i audio">
-                                                        Telewizory i audio
-                                                    </li>
-                                                    <li class="md-list-item  " data-dropdown-value="3" data-dropdown-label="Foto i kamery">
-                                                        Foto i kamery
-                                                    </li>
-                                                    <li class="md-list-item  " data-dropdown-value="4" data-dropdown-label="AGD">
-                                                        AGD
-                                                    </li>
-                                                    <li class="md-list-item  " data-dropdown-value="5" data-dropdown-label="Laptopy">
-                                                        Laptopy
-                                                    </li>
-                                                    <li class="md-list-item  " data-dropdown-value="6" data-dropdown-label="Podzespoły komputerowe">
-                                                        Podzespoły komputerowe
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button type="submit" class="btn h-quick-search-submit"></button>
-                                </form>
-                            </div>
-                        </div>
+                    <from class="search_form">
+                        <input type="text" class="form-control" placeholder="Wyszukaj produkt...">
+                        <button class="" type="submit">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </button>
+                    </from>
+                    <div class="user_option_box">
+                        <a href="" class="account-link">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <span>
+                  Moje Konto
+                </span>
+                        </a>
+                        <a href="" class="cart-link">
+                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                            <span>
+                  Koszyk
+                </span>
+                        </a>
                     </div>
                 </div>
-            </div>
-        </div>
-    </header>
-</div>
+
 </body>
 </html>
