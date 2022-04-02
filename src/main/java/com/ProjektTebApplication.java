@@ -1,13 +1,25 @@
-package com.shop;
+package com;
 
+import com.shop.repositories.ShopDatabaseRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import javax.annotation.PostConstruct;
 
 @SpringBootApplication
 public class ProjektTebApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjektTebApplication.class, args);
+	}
+
+	@Autowired
+	ShopDatabaseRepository shopDatabaseRepository;
+
+	@PostConstruct
+	public void generator(){
+
 	}
 
 }

@@ -1,20 +1,22 @@
 package com.shop.repositories;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class ShopEntity {
     //Informacje na temat sprzedawanych produktów.
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-
+    private long id;
+    @Column(name = "PRODUCT_NAME", length = 50, nullable = false)
     private String productName; //nazwa produktu
+    @Column(name = "COMPANY_NAME", length = 80, nullable = false)
     private String companyName; //nazwa firmy produkującej produkt
+    @Column(name = "PRICE", nullable = false, precision = 2)
     private Double price;
+
+    ShopEntity(){
+    }
 
     public ShopEntity(String productName, String companyName, Double price) {
         this.productName = productName;
@@ -26,7 +28,7 @@ public class ShopEntity {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 
