@@ -1,5 +1,7 @@
 package com;
 
+import com.account.repositories.AccountDatabaseRepository;
+import com.cart.repositories.CartDatabaseRepository;
 import com.shop.repositories.ShopDatabaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -16,6 +18,12 @@ public class ProjektTebApplication {
 
 	@Autowired
 	ShopDatabaseRepository shopDatabaseRepository;
+
+	@Autowired
+	AccountDatabaseRepository accountDatabaseRepository;
+
+	@Autowired
+	CartDatabaseRepository cartDatabaseRepository;
 
 	@PostConstruct
 	public void generator(){
