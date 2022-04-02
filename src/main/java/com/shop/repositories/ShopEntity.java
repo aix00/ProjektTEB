@@ -1,5 +1,7 @@
 package com.shop.repositories;
 
+import com.cart.repositories.CartEntity;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,6 +16,8 @@ public class ShopEntity {
     private String companyName; //nazwa firmy produkującej produkt
     @Column(name = "PRICE", nullable = false, precision = 2)
     private Double price;
+    @ManyToOne
+    private CartEntity cartEntity;
 
     ShopEntity(){
     }
@@ -54,6 +58,14 @@ public class ShopEntity {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public CartEntity getCartEntity() {
+        return this.cartEntity;
+    }
+
+    public void setCartEntity(CartEntity cartEntity) {
+        this.cartEntity = cartEntity;
     }
 
     @Override
