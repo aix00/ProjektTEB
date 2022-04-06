@@ -25,8 +25,8 @@ public class ShopRepository {
     }
 
     //Getting a specific product from ShopEntity based on its ID. If it doesn't exist it throws an exception
-    public ShopEntity getShopProduct(String id) throws NotFoundException {
-        ShopEntity shopEntity = shopDatabaseRepository.findById(Long.parseLong(id)).orElse(null);
+    public ShopEntity getShopProduct(long id) throws NotFoundException {
+        ShopEntity shopEntity = shopDatabaseRepository.findById(id).orElse(null);
         if (shopEntity == null)
                 throw new NotFoundException();
         return new ShopEntity(shopEntity.getProductName(), shopEntity.getCompanyName(), shopEntity.getPrice());
@@ -42,14 +42,14 @@ public class ShopRepository {
     }
 
     //Updating specific product information
-    public void updateProduct(String id, Shop shop){
+    public void updateProduct(long id, Shop shop){
         ShopEntity shopEntity = new ShopEntity(shop.getProductName(), shop.getCompanyName(), shop.getPrice());
-        shopEntity.setId(Long.parseLong(id));
+        shopEntity.setId(id);
         shopDatabaseRepository.save(shopEntity);
     }
     //Deleting specific product information
-    public void deleteProduct(String id){
-        shopDatabaseRepository.deleteById(Long.parseLong(id));
+    public void deleteProduct(long id){
+        shopDatabaseRepository.deleteById(id);
     }
 
 

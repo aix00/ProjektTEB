@@ -19,7 +19,7 @@ public class ShopService {
         return shopRepository.createShopProduct(shop);
     }
 
-    public ShopEntity getShopProduct(String id) throws NotFoundException {
+    public ShopEntity getShopProduct(long id) throws NotFoundException {
         return shopRepository.getShopProduct(id);
     }
 
@@ -28,11 +28,11 @@ public class ShopService {
 
     }
 
-    public void updateProduct(String id, HttpShop httpShop) throws NotFoundException{
+    public void updateProduct(long id, HttpShop httpShop) throws NotFoundException{
         Shop shop = new Shop(httpShop.getProductName(), httpShop.getCompanyName(), httpShop.getPrice());
         shopRepository.updateProduct(id, shop);
     }
-    public void deleteProduct(String id){
+    public void deleteProduct(long id){
         shopRepository.deleteProduct(id);
     }
 }

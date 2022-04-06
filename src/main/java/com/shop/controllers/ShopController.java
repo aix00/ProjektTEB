@@ -24,7 +24,7 @@ public class ShopController {
     }
 
     @GetMapping("/shop/{id}")
-    public HttpShop getProduct(@PathVariable String id){
+    public HttpShop getProduct(@PathVariable long id){
         try{
             ShopEntity shopEntity = shopService.getShopProduct(id);
             return new HttpShop(shopEntity.getProductName(), shopEntity.getCompanyName(), shopEntity.getPrice());
@@ -43,7 +43,7 @@ public class ShopController {
     }
 
     @PutMapping("/shop/{id}")
-    public void updateProduct(@PathVariable String id, @RequestBody HttpShop httpShop){
+    public void updateProduct(@PathVariable long id, @RequestBody HttpShop httpShop){
         try{
             shopService.updateProduct(id, httpShop);
         }catch (NotFoundException e){
@@ -53,7 +53,7 @@ public class ShopController {
 
     @DeleteMapping("/shop/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteProduct(@PathVariable String id){
+    public void deleteProduct(@PathVariable long id){
         shopService.deleteProduct(id);
     }
 }
