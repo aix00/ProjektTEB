@@ -14,12 +14,10 @@ public class CartEntity {
     @OneToMany(fetch = FetchType.EAGER)
     private List<ShopEntity> products;
 
-    public CartEntity(long id) {
-        this.id = id;
+    CartEntity(){
     }
 
-    public CartEntity(long id, List<ShopEntity> products) {
-        this.id = id;
+    public CartEntity(List<ShopEntity> products) {
         this.products = products;
     }
 

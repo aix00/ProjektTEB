@@ -27,8 +27,7 @@ public class AccountEntity {
     AccountEntity(){
     }
 
-    public AccountEntity(long id, String userName, String password, String email, LocalDate birthDate, String favouriteThing, SexOptions sex, boolean isAdmin) {
-        this.id = id;
+    public AccountEntity(String userName, String password, String email, LocalDate birthDate, String favouriteThing, SexOptions sex, boolean isAdmin) {
         this.userName = userName;
         this.password = password;
         this.email = email;

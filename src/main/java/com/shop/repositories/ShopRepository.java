@@ -18,10 +18,10 @@ public class ShopRepository {
     ShopDatabaseRepository shopDatabaseRepository;
 
     //Adding a product
-    public String createShopProduct(Shop shop) {
+    public long createShopProduct(Shop shop) {
         ShopEntity shopEntity = new ShopEntity(shop.getProductName(),shop.getCompanyName(),shop.getPrice());
         ShopEntity savedEntity = shopDatabaseRepository.save(shopEntity);
-        return String.valueOf(savedEntity.getId());
+        return savedEntity.getId();
     }
 
     //Getting a specific product from ShopEntity based on its ID. If it doesn't exist it throws an exception

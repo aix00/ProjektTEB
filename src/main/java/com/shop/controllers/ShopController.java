@@ -19,7 +19,7 @@ public class ShopController {
     private ShopService shopService;
 
     @PostMapping("/shop")
-    public String createShopProduct(@RequestBody HttpShop httpShop){
+    public long createShopProduct(@RequestBody HttpShop httpShop){
         return shopService.createShopProduct(httpShop);
     }
 

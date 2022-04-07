@@ -14,7 +14,7 @@ public class ShopService {
     @Autowired
     private ShopRepository shopRepository;
 
-    public String createShopProduct(HttpShop httpShop) {
+    public long createShopProduct(HttpShop httpShop) {
         Shop shop = new Shop(httpShop.getProductName(), httpShop.getCompanyName(), httpShop.getPrice());
         return shopRepository.createShopProduct(shop);
     }
