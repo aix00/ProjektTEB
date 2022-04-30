@@ -31,6 +31,7 @@ public class ShopController {
         } catch (NotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
+
     }
 
     @GetMapping("/shop")
