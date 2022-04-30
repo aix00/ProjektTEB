@@ -9,7 +9,7 @@
     <meta name="description" content="Projekt strony internetowej TEB">
     <meta name="author" content="Krystian Raczyński & Tymoteusz Jeske-Stock">
 
-    <title>Login to our service</title>
+    <title>Create New Account</title>
 
     <!-- boostrap ccs -->
     <link rel="stylesheet" type="text/css" href="css/boostrap.css" />
@@ -99,24 +99,23 @@
         </div>
     </header>
     <!-- end header section -->
-    <!-- login section -->
-    <h1 class="login-header" style="text-align:center;margin-top: 20px;">Login</h1>
+    <!-- account creation section -->
+    <h1 style="text-align:center;margin-top: 20px;">Create your account</h1>
 
-    <form action="" method="post" class="login-form" style="text-align:center">
-        <p>
+    <form action="http://localhost:8080/account/create" method="post">
+        <p class="login-p">
             Username: <input type="text" name="username" />
         </p>
-        <p>
+        <p class="login-p">
             Password: <input type="text" name="password" />
         </p>
-        <input type="submit" value="Login"/>
+        <p class="login-p">
+            Email: <input type="text" name="email" /></br>
+        </p>
+        <input class="login-btn" type="submit" value="Create Account"/>
     </form>
-    <h6 style="text-align:center;margin-top: 20px;">
-        Don't have an Account yet?</br>
-        <a href="createAccount.html" class="login-link">Create new</a>
-    </h6>
 
-    <!-- end of login section -->
+    <!-- end of account creation section -->
 </div>
 
 <!-- info section -->
