@@ -1,13 +1,12 @@
-package com.shop.controllers;
+package com.project.shop.servicies;
 
-public class HttpShop {
-
+public class Shop {
 
     public String productName;
     public String companyName;
     public Double price;
 
-    public HttpShop(String productName, String companyName, Double price) {
+    public Shop(String productName, String companyName, Double price) {
         this.productName = productName;
         this.companyName = companyName;
         this.price = price;

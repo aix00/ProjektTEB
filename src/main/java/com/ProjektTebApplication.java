@@ -1,13 +1,35 @@
-package com.shop;
+package com;
 
+import com.project.account.repositories.AccountDatabaseRepository;
+import com.project.cart.repositories.CartDatabaseRepository;
+import com.project.shop.repositories.ShopDatabaseRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
+
+import javax.annotation.PostConstruct;
 
 @SpringBootApplication
+@ComponentScan(basePackages = "com.project")
 public class ProjektTebApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjektTebApplication.class, args);
+	}
+
+	@Autowired
+	ShopDatabaseRepository shopDatabaseRepository;
+
+	@Autowired
+	AccountDatabaseRepository accountDatabaseRepository;
+
+	@Autowired
+	CartDatabaseRepository cartDatabaseRepository;
+
+	@PostConstruct
+	public void generator(){
+
 	}
 
 }
