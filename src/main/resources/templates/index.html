@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl-PL">
+<html xmlns:th="http://www.thymeleaf.org" lang="pl-PL">
 <head>
     <!-- Basic -->
     <meta charset="UTF-8">
@@ -12,17 +12,29 @@
     <title>Website Project Teb</title>
 
     <!-- boostrap ccs -->
-    <link rel="stylesheet" type="text/css" href="css/boostrap.css" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/boostrap.css}" />
 
     <!-- fonts style -->
-    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet" />
 
     <!-- custom styles -->
-    <link href="css/style.css" rel="stylesheet" />
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
 
     <!-- rensponsive style -->
-    <link href="css/responsive.css" rel="stylesheet" />
-
+    <link th:href="@{/css/responsive.css}" rel="stylesheet" />
+    <style>
+        .label{
+            background-color: white !important;
+            color: red;
+            border-radius: 35px;
+            font-size: 10px;
+            margin-top: -8px;
+            margin-left: -56px;
+            position: absolute;
+            padding: 4px 8px;
+            line-height: 7px;
+        }
+    </style>
 </head>
 <body>
 
@@ -46,24 +58,27 @@
                 </span>
                         </a>
                     </div>
-                    <from class="search_form">
-                        <input type="text" class="form-control" placeholder="Wyszukaj produkt...">
-                        <button class="" type="submit">
-                            <i class="fa fa-search" aria-hidden="true"></i>
-                        </button>
-                    </from>
                     <div class="user_option_box">
-                        <a href="" class="account-link">
+                        <span style="color: white">[[${user.firstName}]]</span>
+                        <a class="account-link">
                             <i class="fa fa-user" aria-hidden="true"></i>
-                            <span>
-                  Moje Konto
-                </span>
+
                         </a>
-                        <a href="" class="cart-link">
+                        <a  th:if="${shop != null}" th:href="@{'/User/cart?id='+${shop.id}}" class="cart-link">
+                            <span
+                                    class="label">[[${shop.nbItems}]]
+                            </span>
+
                             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                            <span>
-                  Koszyk
-                </span>
+
+                        </a>
+                        <a  th:if="${shop == null}" th:href="@{/User/cart}" class="cart-link">
+                            <span
+                                    class="label">0
+                            </span>
+                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+
+
                         </a>
                     </div>
                 </div>
@@ -73,7 +88,7 @@
         <div class="header_bottom">
             <div class="container-fluid">
                 <nav class="navbar navbar-expand-lg custom_nav-container ">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="index">
               <span>
                 TebShop
               </span>
@@ -86,13 +101,13 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ">
                             <li class="nav-item active">
-                                <a class="nav-link" href="index.html">Start </a>
+                                <a class="nav-link" th:href="@{/User/index}">Start </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="product.html">Produkty</a>
+                                <a class="nav-link" th:href="@{/User/cart}">Koszyk</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="why.html">Dlaczego my</a>
+                                <a class="nav-link" th:href="@{/logout}">Wyloguj</a>
                         </ul>
                     </div>
                 </nav>
@@ -104,78 +119,29 @@
     <section class="slider_section ">
         <div id="customCarousel1" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
-                <div class="carousel-item active">
+                <div th:each="p ,state : ${products}"  th:class="${state.first}?'carousel-item active':'carousel-item'">
                     <div class="container ">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="detail-box">
                                     <h1>
-                                        Slajd 1
+                                       [[${p.name}]]
                                     </h1>
                                     <p>
-                                        tekst
+                                        [[${p.description}]]
                                     </p>
-                                    <a href="">
-                                        przekierowanie
-                                    </a>
+
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="img-box">
-                                    <img src="images/slider-img.png" alt="">
+                                    <img th:src="*{'data:image/jpeg;base64,'+{p.image}}" alt="" height="300px">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <div class="container ">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="detail-box">
-                                    <h1>
-                                        Slajd 2
-                                    </h1>
-                                    <p>
-                                        tekst
-                                    </p>
-                                    <a href="">
-                                        przekierowanie
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="img-box">
-                                    <img src="images/slider-img.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="container ">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="detail-box">
-                                    <h1>
-                                        Slajd 3
-                                    </h1>
-                                    <p>
-                                        Tekst
-                                    </p>
-                                    <a href="">
-                                        przekierowanie
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="img-box">
-                                    <img src="images/slider-img.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
             </div>
             <div class="carousel_btn_box">
                 <a class="carousel-control-prev" href="#customCarousel1" role="button" data-slide="prev">
@@ -193,7 +159,7 @@
 
 <!-- product section -->
 
-<section class="product_section layout_padding">
+<section class="product_section pt-4 ">
     <div class="container">
         <div class="heading_container heading_center">
             <h2>
@@ -201,24 +167,87 @@
             </h2>
         </div>
         <div class="row">
-            <div class="col-sm-6 col-lg-4">
+            <div class="col-sm-6 col-lg-4" th:each="p :${products}">
                 <div class="box">
                     <div class="img-box">
-                        <img src="images/p1.png" alt="">
-                        <a href="" class="add_cart_btn">
-                <span>
-                  Dodaj do koszyka
-                </span>
-                        </a>
+                        <img th:src="*{'data:image/jpeg;base64,'+{p.image}}"
+                             style='height: 100%; width: 100%; object-fit: contain' alt="">
+                        <button href="" class="add_cart_btn" data-toggle="modal" th:attr="data-target='#viewM'+${p.id}">
+                           <span>
+                            Opis <i class="fa fa-eye"></i>
+                         </span>
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" th:attr="id='viewM'+${p.id}"  tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Opis produktu </h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col">
+                                                <img th:src="*{'data:image/jpeg;base64,'+{p.image}}"
+                                                     style='height: 100%; width: 100%; object-fit: contain' alt="">
+                                            </div>
+                                            <div class="col">
+                                               <h4> [[${p.name}]]</h4>
+                                                <p><strong>Opis: </strong><span>[[${p.description}]]</span></p>
+                                                <p><strong>Cena: </strong><span>[[${p.price}]] PLN</span></p>
+                                                <p><strong>Ilosc: </strong><span>[[${p.stock}]]</span></p>
+                                                <p><strong>Obnizka: </strong><span>[[${p.reduction}]]</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="detail-box">
                         <h5>
-                            Nazwa produktu<!-- TODO losowy produkt z bazy -->
+                            [[${p.name}]]
                         </h5>
                         <div class="product_info">
                             <h5>
-                                <span>PLN</span> cena <!-- TODO cena -->
+                                <span>[[${p.price}]] PLN</span>
                             </h5>
+                            <button class="btn btn-success btn-sm" data-toggle="modal"  th:attr="data-target='#addM'+${p.id}" >
+                                <i class="fa fa-cart-plus" style="font-size: 20px !important;"></i>
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" th:attr="id='addM'+${p.id}"  tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="uu">Dodaj do koszyka </h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form th:action="@{/User/add-cart}" method="post">
+
+                                                <div class="form-group">
+                                                    <input type="number" name="id" hidden="hidden" th:value="${p.id}" >
+
+                                                    <label for="quantity">Ilosc:</label>
+                                                    <input type="number" name="quantity" min="1" th:attr="max='${p.stock}'"  class="form-control" id="quantity" >
+                                                </div>
+
+                                                <button type="submit" class="btn btn-primary">Dodaj do koszyka</button>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="star_container">
                                 <i class="fa fa-star" aria-hidden="true"></i>
                                 <i class="fa fa-star" aria-hidden="true"></i>
@@ -230,238 +259,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-lg-4">
-                <div class="box">
-                    <div class="img-box">
-                        <img src="images/p2.png" alt="">
-                        <a href="" class="add_cart_btn">
-                <span>
-                  Dodaj do koszyka
-                </span>
-                        </a>
-                    </div>
-                    <div class="detail-box">
-                        <h5>
-                            Nazwa produktu<!-- TODO losowy produkt z bazy -->
-                        </h5>
-                        <div class="product_info">
-                            <h5>
-                                <span>PLN</span> cena <!-- TODO cena -->
-                            </h5>
-                            <div class="star_container">
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-4">
-                <div class="box">
-                    <div class="img-box">
-                        <img src="images/p3.png" alt="">
-                        <a href="" class="add_cart_btn">
-                <span>
-                  Dodaj do koszyka
-                </span>
-                        </a>
-                    </div>
-                    <div class="detail-box">
-                        <h5>
-                            Nazwa produktu<!-- TODO losowy produkt z bazy -->
-                        </h5>
-                        <div class="product_info">
-                            <h5>
-                                <span>PLN</span> cena <!-- TODO cena -->
-                            </h5>
-                            <div class="star_container">
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-4">
-                <div class="box">
-                    <div class="img-box">
-                        <img src="images/p4.png" alt="">
-                        <a href="" class="add_cart_btn">
-                <span>
-                  Dodaj do koszyka
-                </span>
-                        </a>
-                    </div>
-                    <div class="detail-box">
-                        <h5>
-                            Nazwa produktu<!-- TODO losowy produkt z bazy -->
-                        </h5>
-                        <div class="product_info">
-                            <h5>
-                                <span>PLN</span> cena <!-- TODO cena -->
-                            </h5>
-                            <div class="star_container">
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-4">
-                <div class="box">
-                    <div class="img-box">
-                        <img src="images/p5.png" alt="">
-                        <a href="" class="add_cart_btn">
-                <span>
-                  Dodaj do koszyka
-                </span>
-                        </a>
-                    </div>
-                    <div class="detail-box">
-                        <h5>
-                            Nazwa produktu<!-- TODO losowy produkt z bazy -->
-                        </h5>
-                        <div class="product_info">
-                            <h5>
-                                <span>PLN</span> cena <!-- TODO cena -->
-                            </h5>
-                            <div class="star_container">
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-4">
-                <div class="box">
-                    <div class="img-box">
-                        <img src="images/p6.png" alt="">
-                        <a href="" class="add_cart_btn">
-                <span>
-                  Dodaj do koszyka
-                </span>
-                        </a>
-                    </div>
-                    <div class="detail-box">
-                        <h5>
-                            Nazwa produktu<!-- TODO losowy produkt z bazy -->
-                        </h5>
-                        <div class="product_info">
-                            <h5>
-                                <span>PLN</span> cena <!-- TODO cena -->
-                            </h5>
-                            <div class="star_container">
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-4">
-                <div class="box">
-                    <div class="img-box">
-                        <img src="images/p7.png" alt="">
-                        <a href="" class="add_cart_btn">
-                <span>
-                  Dodaj do koszyka
-                </span>
-                        </a>
-                    </div>
-                    <div class="detail-box">
-                        <h5>
-                            Nazwa produktu<!-- TODO losowy produkt z bazy -->
-                        </h5>
-                        <div class="product_info">
-                            <h5>
-                                <span>PLN</span> cena <!-- TODO cena -->
-                            </h5>
-                            <div class="star_container">
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-4">
-                <div class="box">
-                    <div class="img-box">
-                        <img src="images/p8.png" alt="">
-                        <a href="" class="add_cart_btn">
-                <span>
-                  Dodaj do koszyka
-                </span>
-                        </a>
-                    </div>
-                    <div class="detail-box">
-                        <h5>
-                            Nazwa produktu<!-- TODO losowy produkt z bazy -->
-                        </h5>
-                        <div class="product_info">
-                            <h5>
-                                <span>PLN</span> cena <!-- TODO cena -->
-                            </h5>
-                            <div class="star_container">
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-4">
-                <div class="box">
-                    <div class="img-box">
-                        <img src="images/p9.png" alt="">
-                        <a href="" class="add_cart_btn">
-                <span>
-                  Dodaj do koszyka
-                </span>
-                        </a>
-                    </div>
-                    <div class="detail-box">
-                        <h5>
-                            Nazwa produktu<!-- TODO losowy produkt z bazy -->
-                        </h5>
-                        <div class="product_info">
-                            <h5>
-                                <span>PLN</span> cena <!-- TODO cena -->
-                            </h5>
-                            <div class="star_container">
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
         <div class="btn_box">
             <a href="" class="view_more-link">
@@ -482,14 +280,14 @@
             <div class="col-md-4">
                 <div class="box ">
                     <div class="img-box">
-                        <img src="<!-- TODO dodanie ikonki dostawy -->" alt="">
+                        <img src="https://cdn.discordapp.com/attachments/412249264308092941/979496137302114334/on-time-delivery.png" alt="">
                     </div>
                     <div class="detail-box">
                         <h5>
                             Szybka dostawa
                         </h5>
                         <p>
-                            tekst
+                            Zamów do godziny 15, a zamówienie już na następny dzień będzie pod twoimi drzwiami!
                         </p>
                     </div>
                 </div>
@@ -497,14 +295,14 @@
             <div class="col-md-4">
                 <div class="box ">
                     <div class="img-box">
-                        <img src="<!-- TODO dodanie ikonki darmowa dostawa -->" alt="">
+                        <img src="https://cdn.discordapp.com/attachments/412249264308092941/979496126149435412/free-shipping.png" alt="">
                     </div>
                     <div class="detail-box">
                         <h5>
                             Darmowa dostawa
                         </h5>
                         <p>
-                            tekst
+                            Od 50PLN oferujemy darmową dostawę.
                         </p>
                     </div>
                 </div>
@@ -512,14 +310,14 @@
             <div class="col-md-4">
                 <div class="box ">
                     <div class="img-box">
-                        <img src="<!-- TODO dodanie ikonki jakości -->" alt="">
+                        <img src="https://cdn.discordapp.com/attachments/412249264308092941/979496117165244416/best-quality.png" alt="">
                     </div>
                     <div class="detail-box">
                         <h5>
                             Najwyższa Jakość
                         </h5>
                         <p>
-                            tekst
+                            Nasze produkty są tworzone z najlepszych podzespolów!
                         </p>
                     </div>
                 </div>
@@ -560,60 +358,11 @@
                         Informacje
                     </h5>
                     <p>
-                        tekst
+                        Jesteśmy jednym z liderów polskiego rynku e-commerce
+                        w segmencie dystrybucji elektroniki użytkowej (komputery, laptopy, podzespoły komputerowe, RTV, AGD) z blisko 20-letnią historią obecności w branży.
                     </p>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="info_links">
-                    <h5>
-                        Podstrony
-                    </h5>
-                    <ul>
-                        <li>
-                            <a href="index.html">
-                                Start
-                            </a>
-                        </li>
-                        <li>
-                            <a href="product.html">
-                                Produkty
-                            </a>
-                        </li>
-                        <li>
-                            <a href="why.html">
-                                Dlaczego my
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="info_form ">
-                    <h5>
-                        Newsletter
-                    </h5>
-                    <form action="">
-                        <input type="email" placeholder="Wpisz swój email">
-                        <button>
-                            Zostań naszym Newsletter'em
-                        </button>
-                    </form>
-                    <div class="social_box">
-                        <a href="">
-                            <i class="fa fa-facebook" aria-hidden="true"></i>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-twitter" aria-hidden="true"></i>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-instagram" aria-hidden="true"></i>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-youtube" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -633,13 +382,10 @@
 <!-- footer section -->
 
 <!-- jQery -->
-<script src="js/jquery-3.4.1.min.js"></script>
-<!-- bootstrap js -->
-<script src="js/bootstrap.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <!-- custom js -->
-<script src="js/custom.js"></script>
-
-
+<script th:src="@{/js/custrom.js}"></script>
 </body>
-
 </html>

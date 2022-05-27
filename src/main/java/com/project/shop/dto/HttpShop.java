@@ -1,4 +1,4 @@
-package com.project.shop.controllers;
+package com.project.shop.dto;
 
 public class HttpShop {
 
