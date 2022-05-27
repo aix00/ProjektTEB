@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl-PL">
+<head>
+    <!-- Basic -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Site Metas -->
+    <link rel="icon" href="https://edu.wroc.pl/wp-content/uploads/2021/04/teb_edukacja_logo-s.jpg"/>
+    <meta name="description" content="Projekt strony internetowej TEB">
+    <meta name="author" content="Krystian Raczyński & Tymoteusz Jeske-Stock">
+
+    <title>Website Project Teb</title>
+
+    <!-- boostrap ccs -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/boostrap.css}" />
+
+    <!-- fonts style -->
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet" />
+
+    <!-- custom styles -->
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+
+    <!-- rensponsive style -->
+    <link th:href="@{/css/responsive.css}" rel="stylesheet" />
+    <style>
+        .label{
+            background-color: white !important;
+            color: red;
+            border-radius: 35px;
+            font-size: 10px;
+            margin-top: -8px;
+            margin-left: -56px;
+            position: absolute;
+            padding: 4px 8px;
+            line-height: 7px;
+        }
+        .table>tbody>tr>td, .table>tfoot>tr>td{
+            vertical-align: middle;
+        }
+        @media screen and (max-width: 600px) {
+            table#cart tbody td .form-control{
+                width:20%;
+                display: inline !important;
+            }
+            .actions .btn{
+                width:36%;
+                margin:1.5em 0;
+            }
+
+            .actions .btn-info{
+                float:left;
+            }
+            .actions .btn-danger{
+                float:right;
+            }
+
+            table#cart thead { display: none; }
+            table#cart tbody td { display: block; padding: .6rem; min-width:320px;}
+            table#cart tbody tr td:first-child { background: #333; color: #fff; }
+            table#cart tbody td:before {
+                content: attr(data-th); font-weight: bold;
+                display: inline-block; width: 8rem;
+            }
+
+
+
+            table#cart tfoot td{display:block; }
+            table#cart tfoot td .btn{display:block;}
+
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero_area" style="min-height: 1vh !important">
+    <!-- header section -->
+    <header class="header_section">
+        <div class="header_top">
+            <div class="container-fluid">
+                <div class="top_nav_container">
+                    <div class="contact_nav">
+                        <a href="">
+                            <i class="fa fa-phone" aria-hidden="true"></i>
+                            <span>
+                  Telefon : +48 123 456 7892311
+                </span>
+                        </a>
+                        <a href="">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                            <span>
+                  Email : projektTeb@gmail.com
+                </span>
+                        </a>
+                    </div>
+                    <from class="search_form">
+                        <input type="text" class="form-control" placeholder="Wyszukaj produkt...">
+                        <button class="" type="submit">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </button>
+                    </from>
+                    <div class="user_option_box">
+                        <span style="color:white">[[${user.firstName}]]</span>
+                        <a href="#" class="account-link">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </a>
+                        <a th:href="@{'/User/cart?id='+${shop.id}}" class="cart-link">
+                             <span th:if="${shop != null}"
+                                   class="label">[[${shop.nbItems}]]
+                            </span>
+                            <span th:if="${shop == null}"
+                                  class="label">0
+                            </span>
+                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="header_bottom">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg custom_nav-container ">
+                    <a class="navbar-brand" href="index">
+              <span>
+                TebShop
+              </span>
+                    </a>
+
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class=""> </span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ">
+                            <li class="nav-item active">
+                                <a class="nav-link" th:href="@{/User/index}">Start </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/User/cart}">My cart</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/logout}">Logout</a>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+</div>
+
+<!-- product section -->
+
+<section class="product_section pt-4 ">
+    <div class="container">
+        <div class="heading_container heading_center">
+            <h2>
+                Koszyk
+            </h2>
+        </div>
+        <div class="row">
+
+            <div class="container">
+                <table id="cart" class="table table-hover table-condensed">
+                    <thead>
+                    <tr>
+                        <th style="width:50%">Produkt</th>
+                        <th style="width:10%">Cena</th>
+                        <th style="width:8%">Ilosc</th>
+                        <th style="width:22%" class="text-center">Suma</th>
+                        <th style="width:10%"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item : ${shop.items}">
+                        <td data-th="Product">
+                            <div class="row">
+                                <div class="col-sm-2 hidden-xs"><img th:src="*{'data:image/jpeg;base64,'+{item.product.image}}" alt="..." width="95px" height="100px" class="img-responsive"/></div>
+                                <div class="col-sm-10">
+                                    <h4 class="nomargin pl-2">[[${item.product.name}]]</h4>
+                                    <p class="pl-2">[[${item.product.description}]]</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td data-th="Price">[[${item.product.price}]] PLN</td>
+                        <form th:action="@{/User/update-cartItem}">
+                        <td data-th="Quantity">
+                            <input type="number" name="quantity" min="1" th:value="${item.getQuantity()}" th:attr="max='${item.product.stock}'" class="form-control text-center" value="1">
+                            <input type="number" hidden="hidden" name="id" th:value="${item.id}">
+                        </td>
+                        <td data-th="Subtotal" class="text-center">[[${item.getSubtotal()}]]</td>
+                        <td class="actions" data-th="">
+                            <button th:href class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
+                           </form>
+                            <a th:href="@{/User/remove-cartItem/{id}(id=${item.id})}" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr class="visible-xs">
+                        <td class="text-center"><strong>Łącznie: [[${shop.getTotalPrice()}]] PLN</strong></td>
+                    </tr>
+                    <tr>
+                        <td><a th:href="@{/User/index}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Kontynuuj zakupy</a></td>
+                        <td colspan="2" class="hidden-xs"></td>
+                        <td class="hidden-xs text-center"><strong>Do zapłaty: [[${shop.getTotalPrice()}]] PLN</strong></td>
+                        <td><a href="#" class="btn btn-success btn-block">Dalej <i class="fa fa-angle-right"></i></a></td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="why_us_section layout_padding">
+    <div class="container">
+        <div class="heading_container heading_center">
+            <h2>
+                Dlaczego my?
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="box ">
+                    <div class="img-box">
+                        <img src="https://cdn.discordapp.com/attachments/412249264308092941/979496137302114334/on-time-delivery.png" alt="">
+                    </div>
+                    <div class="detail-box">
+                        <h5>
+                            Szybka dostawa
+                        </h5>
+                        <p>
+                            Zamów do godziny 15, a zamówienie już na następny dzień będzie pod twoimi drzwiami!
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="box ">
+                    <div class="img-box">
+                        <img src="https://cdn.discordapp.com/attachments/412249264308092941/979496126149435412/free-shipping.png" alt="">
+                    </div>
+                    <div class="detail-box">
+                        <h5>
+                            Darmowa dostawa
+                        </h5>
+                        <p>
+                            Od 50 PLN oferujemy darmową dostawę.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="box ">
+                    <div class="img-box">
+                        <img src="https://cdn.discordapp.com/attachments/412249264308092941/979496117165244416/best-quality.png" alt="">
+                    </div>
+                    <div class="detail-box">
+                        <h5>
+                            Najwyższa Jakość
+                        </h5>
+                        <p>
+                            Nasze produkty są tworzone z najlepszych podzespolów!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="info_section ">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="info_contact">
+                    <h5>
+                        <a href="" class="navbar-brand">
+                <span>
+                  TebShop
+                </span>
+                        </a>
+                    </h5>
+                    <p>
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                        Adres
+                    </p>
+                    <p>
+                        <i class="fa fa-phone" aria-hidden="true"></i>
+                        +48 123 456 789
+                    </p>
+                    <p>
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                        TebShop@gmail.com
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="info_info">
+                    <h5>
+                        Informacje
+                    </h5>
+                    <p>
+                        Jesteśmy jednym z liderów polskiego rynku e-commerce
+                        w segmencie dystrybucji elektroniki użytkowej (komputery, laptopy, podzespoły komputerowe, RTV, AGD) z blisko 20-letnią historią obecności w branży.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+<!-- end info_section -->
+
+
+<!-- footer section -->
+<footer class="footer_section">
+    <div class="container">
+        <p>
+            &copy; <span id="displayYear"></span> All Rights Reserved By TebShop 2022
+        </p>
+    </div>
+</footer>
+<!-- footer section -->
+
+<!-- jQery -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<!-- custom js -->
+<script th:src="@{/js/custrom.js}"></script>
+</body>
+</html>
